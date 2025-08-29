@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Production Demo - Client Website</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+        .client-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Simulasi konten website client -->
+    <div class="client-content">
+        <h1>Welcome to Our E-commerce Store</h1>
+        <p>This simulates a real client website. The chat widget will load from the built SDK file.</p>
+        <p>Browse our products, add to cart, and if you need help - just click the chat bubble!</p>
+        
+        <div style="display: flex; gap: 20px; margin: 20px 0;">
+            <div style="background: #eee; padding: 15px; border-radius: 5px;">
+                <h3>Product 1</h3>
+                <p>$29.99</p>
+            </div>
+            <div style="background: #eee; padding: 15px; border-radius: 5px;">
+                <h3>Product 2</h3>
+                <p>$49.99</p>
+            </div>
+        </div>
+        
+        <button onclick="showSDKInfo()" style="background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+            Show SDK Status
+        </button>
+    </div>
+
+    <!-- Load PRODUCTION SDK (bukan development) -->
+<!-- HARUS pakai file build, bukan development -->
+<script src="./dist/simple-chat-sdk.iife.js"></script>
+<script>
+    // Tunggu sampai DOM ready
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof SimpleChatSDK !== 'undefined') {
+            const chatSDK = new SimpleChatSDK({
+                title: 'Customer Support',
+                position: 'bottom-right'
+            });
+            chatSDK.init();
+        } else {
+            console.error('SimpleChatSDK not loaded!');
+        }
+    });
+</script>
+</body>
+</html>
