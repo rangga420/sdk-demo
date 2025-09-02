@@ -360,301 +360,197 @@
   function D(n2, t2) {
     return "function" == typeof t2 ? t2(n2) : t2;
   }
-  const ChatBubble = ({ config = {} }) => {
+  function g(n2, t2) {
+    for (var e2 in t2) n2[e2] = t2[e2];
+    return n2;
+  }
+  function E(n2, t2) {
+    for (var e2 in n2) if ("__source" !== e2 && !(e2 in t2)) return true;
+    for (var r2 in t2) if ("__source" !== r2 && n2[r2] !== t2[r2]) return true;
+    return false;
+  }
+  function N(n2, t2) {
+    this.props = n2, this.context = t2;
+  }
+  (N.prototype = new x()).isPureReactComponent = true, N.prototype.shouldComponentUpdate = function(n2, t2) {
+    return E(this.props, n2) || E(this.state, t2);
+  };
+  var T = l$1.__b;
+  l$1.__b = function(n2) {
+    n2.type && n2.type.__f && n2.ref && (n2.props.ref = n2.ref, n2.ref = null), T && T(n2);
+  };
+  var F = l$1.__e;
+  l$1.__e = function(n2, t2, e2, r2) {
+    if (n2.then) {
+      for (var u2, o2 = t2; o2 = o2.__; ) if ((u2 = o2.__c) && u2.__c) return null == t2.__e && (t2.__e = e2.__e, t2.__k = e2.__k), u2.__c(n2, t2);
+    }
+    F(n2, t2, e2, r2);
+  };
+  var U = l$1.unmount;
+  function V(n2, t2, e2) {
+    return n2 && (n2.__c && n2.__c.__H && (n2.__c.__H.__.forEach(function(n3) {
+      "function" == typeof n3.__c && n3.__c();
+    }), n2.__c.__H = null), null != (n2 = g({}, n2)).__c && (n2.__c.__P === e2 && (n2.__c.__P = t2), n2.__c.__e = true, n2.__c = null), n2.__k = n2.__k && n2.__k.map(function(n3) {
+      return V(n3, t2, e2);
+    })), n2;
+  }
+  function W(n2, t2, e2) {
+    return n2 && e2 && (n2.__v = null, n2.__k = n2.__k && n2.__k.map(function(n3) {
+      return W(n3, t2, e2);
+    }), n2.__c && n2.__c.__P === t2 && (n2.__e && e2.appendChild(n2.__e), n2.__c.__e = true, n2.__c.__P = e2)), n2;
+  }
+  function P() {
+    this.__u = 0, this.o = null, this.__b = null;
+  }
+  function j(n2) {
+    var t2 = n2.__.__c;
+    return t2 && t2.__a && t2.__a(n2);
+  }
+  function B() {
+    this.i = null, this.l = null;
+  }
+  l$1.unmount = function(n2) {
+    var t2 = n2.__c;
+    t2 && t2.__R && t2.__R(), t2 && 32 & n2.__u && (n2.type = null), U && U(n2);
+  }, (P.prototype = new x()).__c = function(n2, t2) {
+    var e2 = t2.__c, r2 = this;
+    null == r2.o && (r2.o = []), r2.o.push(e2);
+    var u2 = j(r2.__v), o2 = false, i2 = function() {
+      o2 || (o2 = true, e2.__R = null, u2 ? u2(l2) : l2());
+    };
+    e2.__R = i2;
+    var l2 = function() {
+      if (!--r2.__u) {
+        if (r2.state.__a) {
+          var n3 = r2.state.__a;
+          r2.__v.__k[0] = W(n3, n3.__c.__P, n3.__c.__O);
+        }
+        var t3;
+        for (r2.setState({ __a: r2.__b = null }); t3 = r2.o.pop(); ) t3.forceUpdate();
+      }
+    };
+    r2.__u++ || 32 & t2.__u || r2.setState({ __a: r2.__b = r2.__v.__k[0] }), n2.then(i2, i2);
+  }, P.prototype.componentWillUnmount = function() {
+    this.o = [];
+  }, P.prototype.render = function(n2, e2) {
+    if (this.__b) {
+      if (this.__v.__k) {
+        var r2 = document.createElement("div"), o2 = this.__v.__k[0].__c;
+        this.__v.__k[0] = V(this.__b, r2, o2.__O = o2.__P);
+      }
+      this.__b = null;
+    }
+    var i2 = e2.__a && _(k$1, null, n2.fallback);
+    return i2 && (i2.__u &= -33), [_(k$1, null, e2.__a ? null : n2.children), i2];
+  };
+  var H = function(n2, t2, e2) {
+    if (++e2[1] === e2[0] && n2.l.delete(t2), n2.props.revealOrder && ("t" !== n2.props.revealOrder[0] || !n2.l.size)) for (e2 = n2.i; e2; ) {
+      for (; e2.length > 3; ) e2.pop()();
+      if (e2[1] < e2[0]) break;
+      n2.i = e2 = e2[2];
+    }
+  };
+  (B.prototype = new x()).__a = function(n2) {
+    var t2 = this, e2 = j(t2.__v), r2 = t2.l.get(n2);
+    return r2[0]++, function(u2) {
+      var o2 = function() {
+        t2.props.revealOrder ? (r2.push(u2), H(t2, n2, r2)) : u2();
+      };
+      e2 ? e2(o2) : o2();
+    };
+  }, B.prototype.render = function(n2) {
+    this.i = null, this.l = /* @__PURE__ */ new Map();
+    var t2 = H$1(n2.children);
+    n2.revealOrder && "b" === n2.revealOrder[0] && t2.reverse();
+    for (var e2 = t2.length; e2--; ) this.l.set(t2[e2], this.i = [1, 0, this.i]);
+    return n2.children;
+  }, B.prototype.componentDidUpdate = B.prototype.componentDidMount = function() {
+    var n2 = this;
+    this.l.forEach(function(t2, e2) {
+      H(n2, e2, t2);
+    });
+  };
+  var q = "undefined" != typeof Symbol && Symbol.for && Symbol.for("react.element") || 60103, G = /^(?:accent|alignment|arabic|baseline|cap|clip(?!PathU)|color|dominant|fill|flood|font|glyph(?!R)|horiz|image(!S)|letter|lighting|marker(?!H|W|U)|overline|paint|pointer|shape|stop|strikethrough|stroke|text(?!L)|transform|underline|unicode|units|v|vector|vert|word|writing|x(?!C))[A-Z]/, J = /^on(Ani|Tra|Tou|BeforeInp|Compo)/, K = /[A-Z0-9]/g, Q = "undefined" != typeof document, X = function(n2) {
+    return ("undefined" != typeof Symbol && "symbol" == typeof Symbol() ? /fil|che|rad/ : /fil|che|ra/).test(n2);
+  };
+  x.prototype.isReactComponent = {}, ["componentWillMount", "componentWillReceiveProps", "componentWillUpdate"].forEach(function(t2) {
+    Object.defineProperty(x.prototype, t2, { configurable: true, get: function() {
+      return this["UNSAFE_" + t2];
+    }, set: function(n2) {
+      Object.defineProperty(this, t2, { configurable: true, writable: true, value: n2 });
+    } });
+  });
+  var en = l$1.event;
+  function rn() {
+  }
+  function un() {
+    return this.cancelBubble;
+  }
+  function on() {
+    return this.defaultPrevented;
+  }
+  l$1.event = function(n2) {
+    return en && (n2 = en(n2)), n2.persist = rn, n2.isPropagationStopped = un, n2.isDefaultPrevented = on, n2.nativeEvent = n2;
+  };
+  var cn = { enumerable: false, configurable: true, get: function() {
+    return this.class;
+  } }, fn = l$1.vnode;
+  l$1.vnode = function(n2) {
+    "string" == typeof n2.type && (function(n3) {
+      var t2 = n3.props, e2 = n3.type, u2 = {}, o2 = -1 === e2.indexOf("-");
+      for (var i2 in t2) {
+        var l2 = t2[i2];
+        if (!("value" === i2 && "defaultValue" in t2 && null == l2 || Q && "children" === i2 && "noscript" === e2 || "class" === i2 || "className" === i2)) {
+          var c2 = i2.toLowerCase();
+          "defaultValue" === i2 && "value" in t2 && null == t2.value ? i2 = "value" : "download" === i2 && true === l2 ? l2 = "" : "translate" === c2 && "no" === l2 ? l2 = false : "o" === c2[0] && "n" === c2[1] ? "ondoubleclick" === c2 ? i2 = "ondblclick" : "onchange" !== c2 || "input" !== e2 && "textarea" !== e2 || X(t2.type) ? "onfocus" === c2 ? i2 = "onfocusin" : "onblur" === c2 ? i2 = "onfocusout" : J.test(i2) && (i2 = c2) : c2 = i2 = "oninput" : o2 && G.test(i2) ? i2 = i2.replace(K, "-$&").toLowerCase() : null === l2 && (l2 = void 0), "oninput" === c2 && u2[i2 = c2] && (i2 = "oninputCapture"), u2[i2] = l2;
+        }
+      }
+      "select" == e2 && u2.multiple && Array.isArray(u2.value) && (u2.value = H$1(t2.children).forEach(function(n4) {
+        n4.props.selected = -1 != u2.value.indexOf(n4.props.value);
+      })), "select" == e2 && null != u2.defaultValue && (u2.value = H$1(t2.children).forEach(function(n4) {
+        n4.props.selected = u2.multiple ? -1 != u2.defaultValue.indexOf(n4.props.value) : u2.defaultValue == n4.props.value;
+      })), t2.class && !t2.className ? (u2.class = t2.class, Object.defineProperty(u2, "className", cn)) : (t2.className && !t2.class || t2.class && t2.className) && (u2.class = u2.className = t2.className), n3.props = u2;
+    })(n2), n2.$$typeof = q, fn && fn(n2);
+  };
+  var an = l$1.__r;
+  l$1.__r = function(n2) {
+    an && an(n2), n2.__c;
+  };
+  var sn = l$1.diffed;
+  l$1.diffed = function(n2) {
+    sn && sn(n2);
+    var t2 = n2.props, e2 = n2.__e;
+    null != e2 && "textarea" === n2.type && "value" in t2 && t2.value !== e2.value && (e2.value = null == t2.value ? "" : t2.value);
+  };
+  const App = () => {
     const [isOpen, setIsOpen] = d(false);
-    const [messages, setMessages] = d([
-      { id: 1, text: "Hi there! How can I help you today?", sender: "bot" }
-    ]);
-    const [inputValue, setInputValue] = d("");
     const toggleChat = () => {
       setIsOpen(!isOpen);
     };
-    const sendMessage = () => {
-      if (!inputValue.trim()) return;
-      const newMessage = {
-        id: Date.now(),
-        text: inputValue,
-        sender: "user"
-      };
-      setMessages((prev) => [...prev, newMessage]);
-      setInputValue("");
-      setTimeout(() => {
-        const botResponse = {
-          id: Date.now() + 1,
-          text: "Thanks for your message! This is a demo response.",
-          sender: "bot"
-        };
-        setMessages((prev) => [...prev, botResponse]);
-      }, 1e3);
-    };
-    const handleKeyPress = (e2) => {
-      if (e2.key === "Enter") {
-        sendMessage();
-      }
-    };
-    return /* @__PURE__ */ u$1("div", { className: `simple-chat-container ${config.position || "bottom-right"}`, children: [
-      /* @__PURE__ */ u$1("div", { className: `simple-chat-panel ${isOpen ? "open" : ""}`, children: [
-        /* @__PURE__ */ u$1("div", { className: "simple-chat-header", children: [
-          /* @__PURE__ */ u$1("span", { children: config.title || "Chat Support" }),
-          /* @__PURE__ */ u$1("button", { className: "simple-chat-close", onClick: toggleChat, children: "×" })
+    return /* @__PURE__ */ u$1("div", { className: "tdw-chat-widget", children: [
+      /* @__PURE__ */ u$1("div", { className: `tdw-chat-window ${isOpen ? "tdw-chat-open" : ""}`, children: [
+        /* @__PURE__ */ u$1("div", { className: "tdw-chat-header", children: [
+          /* @__PURE__ */ u$1("h3", { children: "Live Chat" }),
+          /* @__PURE__ */ u$1("button", { className: "tdw-chat-close", onClick: toggleChat, children: /* @__PURE__ */ u$1("svg", { viewBox: "0 0 24 24", children: /* @__PURE__ */ u$1("path", { d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" }) }) })
         ] }),
-        /* @__PURE__ */ u$1("div", { className: "simple-chat-messages", children: messages.map((message) => /* @__PURE__ */ u$1(
-          "div",
-          {
-            className: `simple-chat-message ${message.sender}`,
-            children: message.text
-          },
-          message.id
-        )) }),
-        /* @__PURE__ */ u$1("div", { className: "simple-chat-input-container", children: [
-          /* @__PURE__ */ u$1(
-            "input",
-            {
-              type: "text",
-              className: "simple-chat-input",
-              placeholder: "Type your message...",
-              value: inputValue,
-              onChange: (e2) => setInputValue(e2.target.value),
-              onKeyPress: handleKeyPress
-            }
-          ),
-          /* @__PURE__ */ u$1(
-            "button",
-            {
-              className: "simple-chat-send",
-              onClick: sendMessage,
-              disabled: !inputValue.trim(),
-              children: "Send"
-            }
-          )
+        /* @__PURE__ */ u$1("div", { className: "tdw-chat-body", children: [
+          /* @__PURE__ */ u$1("h4", { children: "Hi there! 👋" }),
+          /* @__PURE__ */ u$1("p", { children: "How can we help you today?" })
         ] })
       ] }),
-      /* @__PURE__ */ u$1("button", { className: "simple-chat-bubble", onClick: toggleChat, children: isOpen ? "×" : "💬" })
+      /* @__PURE__ */ u$1("button", { className: "tdw-chat-button", onClick: toggleChat, children: [
+        !isOpen ? /* @__PURE__ */ u$1("svg", { viewBox: "0 0 24 24", children: /* @__PURE__ */ u$1("path", { d: "M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4v3l3-3h9c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z" }) }) : /* @__PURE__ */ u$1("svg", { viewBox: "0 0 24 24", children: /* @__PURE__ */ u$1("path", { d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" }) }),
+        /* @__PURE__ */ u$1("span", { className: "tdw-chat-badge", children: "1" })
+      ] })
     ] });
   };
-  const chatStyles = `
-  .simple-chat-container {
-    position: fixed;
-    z-index: 9999;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  }
-
-  .simple-chat-container.bottom-right {
-    bottom: 20px;
-    right: 20px;
-  }
-
-  .simple-chat-container.bottom-left {
-    bottom: 20px;
-    left: 20px;
-  }
-
-  .simple-chat-container.top-right {
-    top: 20px;
-    right: 20px;
-  }
-
-  .simple-chat-container.top-left {
-    top: 20px;
-    left: 20px;
-  }
-
-  .simple-chat-bubble {
-    width: 60px;
-    height: 60px;
-    background: #007bff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
-    transition: all 0.3s ease;
-    border: none;
-    color: white;
-  }
-
-  .simple-chat-bubble:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
-  }
-
-  .simple-chat-panel {
-    position: absolute;
-    bottom: 80px;
-    right: 0;
-    width: 350px;
-    height: 500px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    transform: scale(0.8) translateY(20px);
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  }
-
-  .simple-chat-panel.open {
-    transform: scale(1) translateY(0);
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .simple-chat-header {
-    background: #007bff;
-    color: white;
-    padding: 16px;
-    font-weight: 600;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .simple-chat-close {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
-    padding: 4px;
-    border-radius: 4px;
-  }
-
-  .simple-chat-close:hover {
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  .simple-chat-messages {
-    flex: 1;
-    padding: 16px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .simple-chat-message {
-    max-width: 80%;
-    padding: 12px 16px;
-    border-radius: 18px;
-    font-size: 14px;
-    line-height: 1.4;
-  }
-
-  .simple-chat-message.user {
-    background: #007bff;
-    color: white;
-    align-self: flex-end;
-    border-bottom-right-radius: 4px;
-  }
-
-  .simple-chat-message.bot {
-    background: #f1f3f5;
-    color: #333;
-    align-self: flex-start;
-    border-bottom-left-radius: 4px;
-  }
-
-  .simple-chat-input-container {
-    padding: 16px;
-    border-top: 1px solid #e9ecef;
-    display: flex;
-    gap: 8px;
-  }
-
-  .simple-chat-input {
-    flex: 1;
-    padding: 12px 16px;
-    border: 1px solid #dee2e6;
-    border-radius: 24px;
-    outline: none;
-    font-size: 14px;
-  }
-
-  .simple-chat-input:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
-  }
-
-  .simple-chat-send {
-    padding: 12px 20px;
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 24px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: background 0.2s;
-  }
-
-  .simple-chat-send:hover {
-    background: #0056b3;
-  }
-
-  .simple-chat-send:disabled {
-    background: #6c757d;
-    cursor: not-allowed;
-  }
-`;
-  const injectChatStyles = () => {
-    if (document.getElementById("simple-chat-styles")) return;
-    const styleElement = document.createElement("style");
-    styleElement.id = "simple-chat-styles";
-    styleElement.textContent = chatStyles;
-    document.head.appendChild(styleElement);
+  window.livechatSDK = {
+    run: function(config = {}) {
+      const container = document.createElement("div");
+      container.id = "livechat-widget-" + Date.now();
+      container.style.cssText = "position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10000;";
+      document.body.appendChild(container);
+      G$1(/* @__PURE__ */ u$1(App, { ...config }), container);
+    }
   };
-  class SimpleChatSDK {
-    constructor(config = {}) {
-      this.config = {
-        containerId: config.containerId || "simple-chat-widget",
-        title: config.title || "Chat Support",
-        position: config.position || "bottom-right",
-        ...config
-      };
-      this.isInitialized = false;
-    }
-    init() {
-      if (this.isInitialized) {
-        console.warn("SimpleChatSDK already initialized");
-        return;
-      }
-      injectChatStyles();
-      this.createContainer();
-      this.renderWidget();
-      this.isInitialized = true;
-    }
-    createContainer() {
-      let container = document.getElementById(this.config.containerId);
-      if (!container) {
-        container = document.createElement("div");
-        container.id = this.config.containerId;
-        document.body.appendChild(container);
-      }
-      this.container = container;
-    }
-    renderWidget() {
-      G(
-        /* @__PURE__ */ u$1(ChatBubble, { config: this.config }),
-        this.container
-      );
-    }
-    destroy() {
-      if (this.container) {
-        this.container.remove();
-      }
-      const styles = document.getElementById("simple-chat-styles");
-      if (styles) {
-        styles.remove();
-      }
-      this.isInitialized = false;
-    }
-  }
-  if (typeof window !== "undefined") {
-    window.SimpleChatSDK = SimpleChatSDK;
-  }
-  return SimpleChatSDK;
 })();
