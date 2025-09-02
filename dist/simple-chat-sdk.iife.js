@@ -544,5 +544,13 @@
       ] })
     ] });
   };
-  G$1(/* @__PURE__ */ u$1(App, {}), document.getElementById("app"));
+  window.livechatSDK = {
+    run: function(config = {}) {
+      const container = document.createElement("div");
+      container.id = "livechat-widget-" + Date.now();
+      container.style.cssText = "position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10000;";
+      document.body.appendChild(container);
+      G$1(/* @__PURE__ */ u$1(App, { ...config }), container);
+    }
+  };
 })();
